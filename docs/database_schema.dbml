@@ -1,0 +1,77 @@
+// Projet PFE Ticketing - Modèle de données
+// Base de données : PostgreSQL
+
+// Table des utilisateurs
+Table users {
+  id integer [primary key]
+  username varchar [not null]
+  email varchar [unique, not null]
+  password_hash varchar [not null]
+  role varchar [not null] // operateur, technicien, responsable
+  first_name varchar
+  last_name varchar
+  is_active boolean [default: true]
+  date_joined datetime [default: `now`]
+}
+
+// Table des équipements
+Table equipment {
+  id integer [primary key]
+  name varchar [not null]
+  equipment_type varchar [not null] // pump, mixer, conveyor, centrifuge, etc.
+  model varchar
+  location varchar [not null]
+  criticality varchar [default: 'medium'] // low, medium, high, critical
+  history text
+  installation_date datetime
+  manufacturer varchar
+}
+
+// Table des tickets de maintenance
+Table tickets {
+  id integer [primary key]
+  title varchar [not null]
+  description text [not null]
+  status varchar [default: 'open'] // open, in_progress, waiting_parts, resolved
+  priority varchar // low, medium, high, urgent
+  created_at datetime [default: `now`]
+  started_at datetime
+  resolved_at datetime
+  technician_notes text
+  
+  // Clés étrangères
+  created_by_id integer [ref: > users.id]
+  assigned_to_id integer [ref: > users.id]
+  equipment_id integer [ref: > equipment.id]
+}
+
+// Table des suggestions générées par l'IA
+Table ia_suggestions {
+  id integer [primary key]
+  root_cause text [not null]
+  checklist text [not null] // étapes à vérifier
+  required_parts text // pièces de rechange suggérées
+  confidence decimal [default: 0.00] // 0 à 1
+  is_accepted boolean [default: false]
+  is_modified boolean [default: false]
+  technician_feedback text
+  created_at datetime [default: `now`]
+  ai_model varchar [default: 'gpt-3.5-turbo']
+  
+  // Clés étrangères
+  ticket_id integer [ref: > tickets.id]
+  generated_by_id integer [ref: > users.id] // technicien qui a reçu la suggestion
+}
+
+// Table des notifications
+Table notifications {
+  id integer [primary key]
+  message text [not null]
+  is_read boolean [default: false]
+  created_at datetime [default: `now`]
+  link varchar // lien vers le ticket concerné
+  
+  // Clés étrangères
+  user_id integer [ref: > users.id]
+  ticket_id integer [ref: > tickets.id]
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Changer statut</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔧 Changer le statut du ticket #{{ ticket.id }}</h1>
+    <p><strong>Titre :</strong> {{ ticket.titre }}</p>
+    <p><strong>Description :</strong> {{ ticket.description }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Nouveau statut :</label>
+        <select name="statut" required>
+            <option value="en_cours" {% if ticket.statut=='en_cours' %}selected{% endif %}>En cours</option>
+            <option value="attente_pieces" {% if ticket.statut=='attente_pieces' %}selected{% endif %}>En attente de
+                pièces</option>
+            <option value="resolu" {% if ticket.statut=='resolu' %}selected{% endif %}>Résolu</option>
+        </select>
+
+        <label>Notes d'intervention :</label>
+        <textarea name="notes_technicien" rows="5">{{ ticket.notes_technicien }}</textarea>
+
+        <button type="submit">Mettre à jour</button>
+    </form>
+
+    <p><a href="{% url 'liste_tickets_technicien' %}">Retour à la liste</a></p>
+</body>
+
+</html>

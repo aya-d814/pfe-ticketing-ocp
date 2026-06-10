@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tableau de bord - Responsable</title>
+</head>
+
+<body>
+    <h1>📊 Tableau de bord Responsable</h1>
+    <p>Bienvenue, {{ user.username }} !</p>
+
+    <h2>📈 Statistiques</h2>
+    <ul>
+        <li>Tickets ouverts : {{ tickets_ouverts }}</li>
+        <li>Total tickets : {{ tickets_total }}</li>
+    </ul>
+
+    <h2>🔧 Top équipements en panne</h2>
+    <ul>
+        {% for item in top_equipements %}
+        <li>{{ item.equipement__nom }} : {{ item.total }} panne(s)</li>
+        {% empty %}
+        <li>Aucune donnée</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="/admin/logout/">Déconnexion</a></p>
+</body>
+
+</html>

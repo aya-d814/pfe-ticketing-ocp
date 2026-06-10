@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Créer un ticket</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+        }
+
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>📝 Créer un ticket de maintenance</h1>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="success">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Titre :</label>
+        <input type="text" name="titre" required>
+
+        <label>Description de la panne :</label>
+        <textarea name="description" rows="5" required></textarea>
+
+        <label>Équipement :</label>
+        <select name="equipement" required>
+            <option value="">-- Sélectionner --</option>
+            {% for equipement in equipements %}
+            <option value="{{ equipement.id }}">{{ equipement.nom }} ({{ equipement.type_equipement }})</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Créer le ticket</button>
+    </form>
+
+    <p><a href="{% url 'mes_tickets' %}">Voir mes tickets</a></p>
+    <p><a href="/admin">Admin</a></p>
+</body>
+
+</html>

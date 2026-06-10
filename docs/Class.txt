@@ -1,0 +1,9 @@
+## 📝 CLASSE UTILISATEUR 
+- **Hérite de AbstractUser** : Django fournit déjà tous les champs de base (username, email, password, first_name, last_name, date_joined, last_login, is_active, is_staff, is_superuser)
+
+- **On ajoute le champ `role`** : ('operateur', 'technicien', 'responsable') → nouveau champ personnalisé
+
+- **Méthode `__str__`** : affiche "alice123 (Opérateur)" au lieu de "Utilisateur object (1)" → affichage lisible
+	-get_role_display() convertit la valeur stockée (operateur) en texte lisible (Opérateur)
+
+- **Classe Meta** : définit verbose_name="Utilisateur" (singulier) et verbose_name_plural="Utilisateurs" (pluriel) → noms français dans l'admin

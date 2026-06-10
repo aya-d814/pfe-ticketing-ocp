@@ -1,0 +1,35 @@
+# User Stories - Projet Ticketing Maintenance
+
+## Acteur : Opérateur
+	- En tant qu'opérateur, je veux me connecter à l'application avec mon email et mot de passe
+	- En tant qu'opérateur, je veux créer un ticket de panne en choisissant un équipement et décrivant la panne
+	- En tant qu'opérateur, je veux voir la liste de mes tickets avec leur statut (ouvert, en cours, attente pièces, résolu)
+	- En tant qu'opérateur, je veux recevoir une notification quand mon ticket est résolu
+
+
+## Acteur : Technicien
+	- En tant que technicien, je veux me connecter à l'application
+	- En tant que technicien, je veux voir tous les tickets ouverts ou qui me sont assignés
+	- En tant que technicien, je veux être assigné à un ticket
+	- En tant que technicien, je veux voir une suggestion IA (cause racine, étapes de vérification, pièces détachées)
+	- En tant que technicien, je veux changer le statut du ticket (En cours, Attente pièces, Résolu)
+	- En tant que technicien, je veux ajouter des notes sur mon intervention
+	- En tant que technicien, je veux accepter, modifier ou ignorer la suggestion IA
+	- En tant que technicien, je veux recevoir une notification quand un nouveau ticket est créé
+
+## Acteur : Responsable
+	- En tant que responsable, je veux me connecter à l'application
+	- En tant que responsable, je veux voir un tableau de bord avec :
+  		- Nombre de tickets ouverts
+  		- Temps moyen de réparation (MTTR)
+  		- Top 3 des équipements les plus en panne
+	- En tant que responsable, je veux filtrer les tickets par période (semaine, mois, année)
+	- En tant que responsable, je veux exporter les statistiques (optionnel)
+
+## Règles métier
+
+	- Un ticket ne peut être créé que par un opérateur ou un responsable
+	- Un ticket ne peut être résolu que par un technicien
+	- La priorité du ticket est calculée automatiquement selon la criticité de l'équipement et les mots-clés de la description
+	- L'assistant IA est appelé automatiquement quand un technicien ouvre un ticket
+	- Les notifications sont envoyées par email ou dans l'application

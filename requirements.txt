@@ -1,0 +1,52 @@
+# ============================================================
+# requirements.txt
+# Système de gestion des tickets OCP — PFE
+# ============================================================
+# Installer avec :
+#   pip install -r requirements.txt
+
+# --- Django & REST ---
+Django>=4.2,<5.0
+djangorestframework>=3.15.0
+django-filter>=24.0
+
+# --- Authentification JWT ---
+djangorestframework-simplejwt>=5.3.0
+
+# --- Base de données PostgreSQL ---
+psycopg2-binary>=2.9.9
+
+# --- Variables d'environnement ---
+python-dotenv>=1.0.0
+
+# --- Utilitaires ---
+Pillow>=10.0.0
+
+# --- Sécurité & CORS (pour le frontend React) ---
+django-cors-headers>=4.3.0
+
+# --- LLM (Semaine 5-6 du planning PFE) ---
+openai>=1.30.0
+httpx>=0.27.0
+
+# ============================================================
+# DOCUMENTATION ET TESTS
+# ============================================================
+
+# --- Documentation API (Swagger) ---
+drf-spectacular>=0.27.0
+
+# --- Tests ---
+coverage>=7.5.0
+pytest-django>=4.8.0
+factory-boy>=3.3.0
+
+# ============================================================
+# Ajouter ces lignes dans requirements.txt
+# ============================================================
+django-filter==24.3
+google-generativeai==0.7.2
+google-genai==2.0.1
+openai>=1.0.0
+scikit-learn>=1.4.0
+pandas>=2.0.0
